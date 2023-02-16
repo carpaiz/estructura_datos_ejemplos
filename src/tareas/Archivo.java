@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,8 +25,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class Archivo {
-    //static int tam = 1000000; // 1 millon
-       static int tam = 100000000;// 100 millones
+    static int tam = 1000000; // 1 millon
+      // static int tam = 100000000;// 100 millones
     public static String Generar() throws IOException {
         
         HashSet<Integer> lista_numeros = new HashSet<>();
@@ -115,6 +117,81 @@ public class Archivo {
         }
  
     }
+     // Método que genera una lista enlazada de n números aleatorios en un rango de min a max
+    public static LinkedList<Integer> generarNumerosAleatorios(int n, int min, int max) {
+        LinkedList<Integer> numeros = new LinkedList<Integer>();
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            int num = rand.nextInt((max - min) + 1) + min;
+            numeros.add(num);
+        }
+
+        return numeros;
+    }
+    public static ArrayList<Integer> generarNumerosAleatorios2(int n, int min, int max) {
+        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            int num = rand.nextInt((max - min) + 1) + min;
+            numeros.add(num);
+        }
+
+        return numeros;
+    }
+    public static int[] generarNumerosAleatorios3(int n, int min, int max,int t) {
+        int[] numeros = new int[t];
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            int num = rand.nextInt((max - min) + 1) + min;
+            numeros[i]=num;
+        }
+
+        return numeros;
+    }
+
+    // Método que guarda los números en un archivo de texto
+    public static void guardarNumerosEnArchivo(LinkedList<Integer> numeros, String nombreArchivo) {
+        try {
+            FileWriter fw = new FileWriter(nombreArchivo);
+            for (int num : numeros) {
+                fw.write(num + "\n");
+            }
+            fw.close();
+            System.out.println("Los números han sido guardados en el archivo " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al guardar los números en el archivo");
+            e.printStackTrace();
+        }
+    }
+    public static void guardarNumerosEnArchivo2(ArrayList<Integer> numeros, String nombreArchivo) {
+        try {
+            FileWriter fw = new FileWriter(nombreArchivo);
+            for (int num : numeros) {
+                fw.write(num + "\n");
+            }
+            fw.close();
+            System.out.println("Los números han sido guardados en el archivo " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al guardar los números en el archivo");
+            e.printStackTrace();
+        }
+    }
+     public static void guardarNumerosEnArchivo3(int[] numeros, String nombreArchivo) {
+        try {
+            FileWriter fw = new FileWriter(nombreArchivo);
+            for (int num : numeros) {
+                fw.write(num + "\n");
+            }
+            fw.close();
+            System.out.println("Los números han sido guardados en el archivo " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al guardar los números en el archivo");
+            e.printStackTrace();
+        }
+    }
     
     public static String Ordenar() throws IOException{
         
@@ -122,7 +199,7 @@ public class Archivo {
         archivo.createNewFile();
         
         ArrayList<String> lineas = new ArrayList<>();
-        Scanner leer = new Scanner(new File("numeros.txt")).useDelimiter(",");
+        Scanner leer = new Scanner(new File("numeros_hs.txt")).useDelimiter(",");
         while(leer.hasNext())
         {
             lineas.add(leer.next());
